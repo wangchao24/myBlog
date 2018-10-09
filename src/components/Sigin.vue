@@ -13,7 +13,7 @@
                 <el-input v-model="formData.passWord" placeholder="请输入密码"></el-input>
             </el-form-item>
         </el-form>
-        <el-button>注册</el-button>
+        <el-button @click='submit'>注册</el-button>
     </div>
 </template>
 <script>
@@ -25,13 +25,23 @@ export default {
                 passWord: ''
             }
         }
+    },
+    methods: {
+        submit() {
+            ajax.post('/api/signup', {
+                name: this.formData.name,
+                passWord: this.formData.passWord
+            }).then((res) => {
+                console.log(res)
+            })
+        }
     }
 }
 </script>
 <style lang='less' scoped>
-    .signinWrap  {
-        width: 400px;
-        margin: 0 auto;
-    }
+.signinWrap {
+    width: 400px;
+    margin: 0 auto;
+}
 </style>
 

@@ -4,6 +4,10 @@
 
 let routes = [
     {
+        path: '/',
+        redirect: "/posts"
+    },
+    {
         path: '/login',
         component: (r) => {
             require.ensure([], () => r(require('@/components/Login.vue')), "login")
@@ -21,5 +25,42 @@ let routes = [
             require.ensure([], () => r(require('@/components/Index.vue')), "index")
         },
     },
+    {
+        path: '/edit',
+        meta: {
+            needLogin: true,
+        },
+        component: (r) => {
+            require.ensure([], () => r(require('@/components/posts/EditPost.vue')), "edit")
+        },
+    },
+    {
+        path: '/detail',
+        meta: {
+            needLogin: true,
+        },
+        component: (r) => {
+            require.ensure([], () => r(require('@/components/posts/postDetail.vue')), "detail")
+        },
+    },
+    {
+        path: '/posts',
+        meta: {
+            needLogin: false,
+        },
+        component: (r) => {
+            require.ensure([], () => r(require('@/components/posts/PostList.vue')), "posts")
+        },
+    },
+    {
+        path: '/personCenter',
+        meta: {
+            needLogin: false,
+        },
+        component: (r) => {
+            require.ensure([], () => r(require('@/components/user/Index.vue')), "personCenter")
+        },
+    },
+
 ]
 export default routes;

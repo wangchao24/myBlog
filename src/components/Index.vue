@@ -5,7 +5,7 @@
 -->
 <template>
     <div class='indexWrap'>
-       
+        <p>hello world</p>
     </div>
 </template>
 <script>
