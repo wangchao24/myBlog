@@ -1,6 +1,7 @@
 <template>
     <div id="app">
         <div class='contentWrap'>
+            <h1>测试是否自动重启构建成功</h1>
             <router-view/>
         </div>
     </div>
