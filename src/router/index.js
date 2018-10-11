@@ -40,7 +40,7 @@ let routes = [
             needLogin: true,
         },
         component: (r) => {
-            require.ensure([], () => r(require('@/components/posts/postDetail.vue')), "detail")
+            require.ensure([], () => r(require('@/components/posts/PostDetail.vue')), "detail")
         },
     },
     {
