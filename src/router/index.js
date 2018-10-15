@@ -60,6 +60,29 @@ let routes = [
         component: (r) => {
             require.ensure([], () => r(require('@/components/user/Index.vue')), "personCenter")
         },
+        children: [
+            {
+                path: 'articleList',
+                name: 'perList',
+                component: (r) => {
+                    require.ensure([], () => r(require('@/components/user/ArticleList.vue')), "articleList")
+                }
+            },
+            {
+                path: 'editArticle',
+                name: 'perListEdit',
+                component: (r) => {
+                    require.ensure([], () => r(require('@/components/user/EditArticle.vue')), "editArticle")
+                }
+            },
+            {
+                path: 'viewArticle',
+                name: 'perListView',
+                component: (r) => {
+                    require.ensure([], () => r(require('@/components/user/ViewArticle.vue')), "viewArticle")
+                }
+            }
+        ]
     },
 
 ]

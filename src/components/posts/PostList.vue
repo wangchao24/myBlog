@@ -7,34 +7,34 @@
     <div class='indexWrap'>
         <header-box></header-box>
         <!-- <div v-if='!ifLogin'>
-                        <span @click="()=>{this.$router.push({path:'/login'})}">登录</span>
-                        <span @click="()=>{this.$router.push({path:'/sigin'})}">注册</span>
-                         <el-dropdown>
-                                    <span class="el-dropdown-link">
-                                        <i class="el-icon-tickets" style='font-size:35px'></i>
-                                    </span>
-                                    <el-dropdown-menu slot="dropdown">
-                                        <el-dropdown-item @click="()=>{this.$router.push({path:'/login'})}">登录</el-dropdown-item>
-                                        <el-dropdown-item @click="()=>{this.$router.push({path:'/sigin'})}">注册</el-dropdown-item>
-                                    </el-dropdown-menu>
-                                </el-dropdown>   
-                    </div>
-                    <div v-if='ifLogin'>
-                        <span @click="()=>{this.$router.push({path:'/personCenter'})}">个人主页</span>
-                        <span @click="()=>{this.$router.push({path:'/edit'})}">发表文章</span>
-                        <span @click="signout">退出</span>
-                         <el-dropdown>
-                                    <span class="el-dropdown-link">
-                                        <i class="el-icon-tickets"></i>
-                                    </span>
-                                    <el-dropdown-menu slot="dropdown">
-                                        <el-dropdown-item @click="()=>{this.$router.push({path:'/personCenter'})}">个人主页</el-dropdown-item>
-                                        <el-dropdown-item @click="()=>{this.$router.push({path:'/edit'})}">发表文章</el-dropdown-item>
-                                        <el-dropdown-item @click="signout">退出登录</el-dropdown-item>
+                                <span @click="()=>{this.$router.push({path:'/login'})}">登录</span>
+                                <span @click="()=>{this.$router.push({path:'/sigin'})}">注册</span>
+                                 <el-dropdown>
+                                            <span class="el-dropdown-link">
+                                                <i class="el-icon-tickets" style='font-size:35px'></i>
+                                            </span>
+                                            <el-dropdown-menu slot="dropdown">
+                                                <el-dropdown-item @click="()=>{this.$router.push({path:'/login'})}">登录</el-dropdown-item>
+                                                <el-dropdown-item @click="()=>{this.$router.push({path:'/sigin'})}">注册</el-dropdown-item>
+                                            </el-dropdown-menu>
+                                        </el-dropdown>   
+                            </div>
+                            <div v-if='ifLogin'>
+                                <span @click="()=>{this.$router.push({path:'/personCenter'})}">个人主页</span>
+                                <span @click="()=>{this.$router.push({path:'/edit'})}">发表文章</span>
+                                <span @click="signout">退出</span>
+                                 <el-dropdown>
+                                            <span class="el-dropdown-link">
+                                                <i class="el-icon-tickets"></i>
+                                            </span>
+                                            <el-dropdown-menu slot="dropdown">
+                                                <el-dropdown-item @click="()=>{this.$router.push({path:'/personCenter'})}">个人主页</el-dropdown-item>
+                                                <el-dropdown-item @click="()=>{this.$router.push({path:'/edit'})}">发表文章</el-dropdown-item>
+                                                <el-dropdown-item @click="signout">退出登录</el-dropdown-item>
 
-                                    </el-dropdown-menu>
-                                </el-dropdown> 
-                    </div> -->
+                                            </el-dropdown-menu>
+                                        </el-dropdown> 
+                            </div> -->
 
         <div v-for='(item,index) in articleList' :key='index' class='articleWrap' @click='viewDetailHandle(item._id)'>
             <h3 class='title'>{{item.title}}</h3>
@@ -49,6 +49,7 @@
 </template>
 <script>
 import headerBox from "@/modules/Header"
+import { mapState } from 'vuex'
 export default {
     data() {
         return {
@@ -58,11 +59,9 @@ export default {
     mounted() {
         this.getPostList();
     },
-    // computed: {
-    //     ifLogin() {
-    //         return app.login;
-    //     }
-    // },
+    computed: {
+        ...mapState(['login'])
+    },
     components: {
         headerBox
     },

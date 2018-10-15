@@ -10,12 +10,12 @@
             <img src="../assets/logo.png" alt="" class='logo'>
         </div>
         <div class='actionBox'>
-            <div v-if='!ifLogin'>
+            <div v-if='!login'>
                 <span @click="()=>{this.$router.push({path:'/login'})}">登录</span>
                 <span @click="()=>{this.$router.push({path:'/sigin'})}">注册</span>
             </div>
-            <div v-if='ifLogin'>
-                <span @click="()=>{this.$router.push({path:'/personCenter'})}">个人主页</span>
+            <div v-if='login'>
+                <span @click="()=>{this.$router.push({path:'/personCenter/articleList'})}">个人主页</span>
                 <span @click="()=>{this.$router.push({path:'/edit'})}">发表文章</span>
                 <span @click="signout">退出</span>
             </div>
@@ -23,6 +23,7 @@
     </div>
 </template>
 <script>
+import { mapState, mapMutations } from 'vuex'
 export default {
     data() {
         return {
@@ -30,15 +31,17 @@ export default {
         }
     },
     computed: {
-        ifLogin() {
-            return app.login;
-        }
+        ...mapState(['login'])
+
     },
     methods: {
+
+        //获取vuex 提交函数
+        ...mapMutations(["setLoginState"]),
         //退出登录
         signout() {
             ajax.get('/api/signout', {}).then((res) => {
-                app.login = false;
+                this.setLoginState(false)
                 this.$router.push({
                     path: '/posts'
                 })

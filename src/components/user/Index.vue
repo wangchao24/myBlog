@@ -17,15 +17,16 @@
                 </el-menu>
             </div>
             <div class='rightContent'>
-                <component :is="personCenterView" :info='info' v-on:editArticle='editArticleHandle' v-on:viewArticle='viewArticleHandle'></component>
+                <!-- <component :is="personCenterView" :info='info' v-on:editArticle='editArticleHandle' v-on:viewArticle='viewArticleHandle'></component> -->
+                <router-view></router-view>
             </div>
         </div>
     </div>
 </template>
 <script>
-import articleList from './ArticleList.vue'
-import editArticle from './EditArticle.vue'
-import viewArticle from './ViewArticle.vue'
+// import articleList from './ArticleList.vue'
+// import editArticle from './EditArticle.vue'
+// import viewArticle from './ViewArticle.vue'
 import headerBox from "@/modules/Header"
 export default {
     data() {
@@ -35,32 +36,14 @@ export default {
         }
     },
     components: {
-        articleList,
-        editArticle,
-        viewArticle,
         headerBox
     },
     methods: {
-        /**
-         * @param option {Oblect} preLoad
-         *
-        */
-        editArticleHandle(option) {
-            this.info = option.item;
-            this.personCenterView = option.view;
-        },
-        /**
-          * @param option {Oblect} preLoad
-          *
-          */
-        viewArticleHandle(option) {
-            this.info = option.item;
-            this.personCenterView = option.view;
-        },
         //查看文章列表
         articleHandle() {
-            this.personCenterView = articleList;
-
+            this.$router.push({
+                path: '/personCenter/articleList'
+            })
         }
     }
 }

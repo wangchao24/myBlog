@@ -5,6 +5,9 @@
 -->
 <template>
     <div class='indexWrap'>
+        <div class='back'>
+            <el-button @click='()=>{this.$router.push({path:"/posts"})}'>返回</el-button>
+        </div>
         <div class='articleContent'>
             <h3 class='title'>{{article.title}}</h3>
             <div class='detailInfo'>

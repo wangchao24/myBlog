@@ -7,7 +7,7 @@
 <template>
     <div class='personArticleWrap'>
         <div class='listWrap'>
-            <div class='articleItem' v-for='(item,index) in articleList' :key='index' @click='viewArticleHandle(item)'>
+            <div class='articleItem' v-for='(item,index) in articleList' :key='index' @click='viewArticleHandle(item._id)'>
                 <p class='title'>{{item.title}}</p>
                 <p class='content' v-html='item.content'></p>
             </div>
@@ -41,33 +41,23 @@ export default {
 
         /**
          * 查看某一篇文章的详细信息
-         * @param item {Object} 当前文章的详细信息
+         * @param id {String} 当前文章的ID
         */
-        // viewArticleHandle(item) {
-        //     let data = {
-        //         item: item,
-        //         view: 'editArticle'
-        //     }
-        //     this.$emit('editArticle', data);
-        // },
+        viewArticleHandle(id) {
+            this.$router.push({
+                path: '/personCenter/viewArticle',
+                query: { id: id }
+            })
+        },
+
 
 
         //创建一篇文章,跳转到创建文章页面
         createArticle() {
-            let data = {
-                item: '',
-                view: 'editArticle'
-            };
-            this.$emit('editArticle', data);
+            this.$router.push({
+                path: '/personCenter/editArticle',
+            })
         },
-        //查看一篇文章，跳转到查看文章页面
-        viewArticleHandle(item) {
-            let data = {
-                item: item,
-                view: 'viewArticle'
-            };
-            this.$emit('viewArticle', data)
-        }
     }
 }
 </script>

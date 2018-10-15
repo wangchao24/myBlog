@@ -30,7 +30,6 @@ const router = new VueRouter({
 //路由切换前，检查登录状态
 router.beforeEach((to, from, next) => {
     let needLogin = to.matched.some(item => item.meta.needLogin == true);
-    console.log(needLogin);
     store.dispatch('checkLogin', { next, needLogin });
 })
 
@@ -44,7 +43,7 @@ let app = window.app = new Vue({
     template: '<App/>',
     data() {
         return {
-            login: false
+            // login: false
         }
     }
 })

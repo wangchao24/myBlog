@@ -5,8 +5,6 @@
 -->
 <template>
     <div class='editArticle'>
-        <!-- <el-input v-model='articleInfo.title'></el-input>
-                                            <el-input type='textarea' v-model='articleInfo.content'></el-input> -->
 
         <div class='editWrap'>
             <el-input v-model='articleInfo.title'></el-input>
@@ -24,10 +22,7 @@
 <script>
 export default {
     props: {
-        info: {
-            require: true,
-            default: {},
-        }
+
     },
     data() {
         return {
@@ -38,21 +33,40 @@ export default {
         }
     },
     mounted() {
+        if (this.$route.query.id) {
+            this.getListDetail();
+        }
     },
     methods: {
         //创建文章
         storeArticle() {
             ajax.post('/api/posts/create', {
                 title: this.articleInfo.title,
-                content: this.articleInfo.content
+                content: this.articleInfo.content,
+                articleId: this.this.$route.query.id ? this.this.$route.query.id : ''
             }).then((res) => {
-                console.log(res);
+                this.$router.push({
+                    path: '/personCenter/articleList'
+                })
+            })
+        },
+        //根据文章id查询文章的详细信息
+        getListDetail() {
+            ajax.get('/api/posts/detail', {
+                params: {
+                    id: this.$route.query.id
+                }
+            }).then((res) => {
+                this.articleInfo.title = res.data.data.title;
+                this.articleInfo.content = res.data.data.content;
             })
         },
         //监听文章改变事件
         changeHandle() {
 
-        }
+        },
+        //文章编辑保存的页面
+
     }
 
 }

@@ -32,7 +32,11 @@ export default {
                 name: this.formData.name,
                 passWord: this.formData.passWord
             }).then((res) => {
-                console.log(res)
+                if (res.data.userInfo) {
+                    this.$route.push({
+                        path:'/posts'
+                    })
+                }
             })
         }
     }

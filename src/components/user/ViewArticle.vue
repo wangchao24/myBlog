@@ -6,8 +6,9 @@
 
 <template>
     <div class='viewArticleWrap'>
+        <el-button @click="editArticle">编辑</el-button>
         <div class='articleContent'>
-            <h3 class='title' >{{article.title}}</h3>
+            <h3 class='title'>{{article.title}}</h3>
             <div class='detailInfo'>
                 <span>创建时间</span>
                 <span>作者</span>
@@ -30,16 +31,10 @@
 <script>
 export default {
     props: {
-        info: {
-            require: true,
-            default: {},
-        }
+
     },
     mounted() {
-        let articleInfo = JSON.parse(JSON.stringify(this.info))
-        this.comments = articleInfo.comments;
-        this.article = articleInfo;
-
+        this.getListDetail();
     },
     data() {
         return {
@@ -47,6 +42,27 @@ export default {
 
             },
             comments: [],//文章的评论列表
+        }
+    },
+    methods: {
+        //根据文章id查询文章的详细信息
+        getListDetail() {
+            ajax.get('/api/posts/detail', {
+                params: {
+                    id: this.$route.query.id
+                }
+            }).then((res) => {
+                this.article = res.data.data;
+                this.comments = res.data.data.comments;
+            })
+        },
+        //编辑一篇文章
+        editArticle() {
+
+            this.$router.push({
+                path: '/personCenter/editArticle',
+                query: this.$route.query
+            })
         }
     }
 }
