@@ -43,7 +43,7 @@ export default {
             ajax.post('/api/posts/create', {
                 title: this.articleInfo.title,
                 content: this.articleInfo.content,
-                articleId: this.this.$route.query.id ? this.this.$route.query.id : ''
+                articleId: this.$route.query.id ? this.$route.query.id : ''
             }).then((res) => {
                 this.$router.push({
                     path: '/personCenter/articleList'
